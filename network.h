@@ -4,7 +4,7 @@
 // Number of zero padding in up/down sampling
 const int ZEROS = 56;
 // Size of one batch of input
-const int INPUT_SIZE = 10000;
+const int INPUT_SIZE = 100000;
 const int HALF_INPUT_SIZE = ceil(INPUT_SIZE / 2.0);
 
 const int RESAMPLE = 4;
@@ -538,8 +538,7 @@ void freeDenoiserState(DenoiserState* ds)
    free(ds->decoder_1_0_weight);
    free(ds->decoder_1_0_bias);
    free(ds->decoder_1_2_weight);
-   // TODO: Fix this memory issue. free(): invalid next size (fast)
-   //free(ds->decoder_1_2_bias);
+   free(ds->decoder_1_2_bias);
 
    free(ds->decoder_0_0_weight);
    free(ds->decoder_0_0_bias);
@@ -547,8 +546,7 @@ void freeDenoiserState(DenoiserState* ds)
    free(ds->decoder_0_2_bias);
 
    free(ds->encoder_3_0_weight);
-   // TODO: Fix this memory issue. double free or corruption (out)
-   //free(ds->encoder_3_0_bias);
+   free(ds->encoder_3_0_bias); 
    free(ds->encoder_3_2_weight);
    free(ds->encoder_3_2_bias);
 
